@@ -1,5 +1,9 @@
 /* Minimal printf() facility for MCUs
- * Warren W. Gay VE3WWG
+ * Warren W. Gay VE3WWG, Sun Feb 12 2017
+ * 
+ * This work is placed into the public domain. No warranty, or guarantee
+ * is expressed or implied. When uou use this source code, you do so
+ * with full responsibility.
  */
 #ifndef MINIPRINTF_H
 #define MINIPRINTF_H
@@ -42,7 +46,7 @@ applies:
     0   Optional: Pad with leading zeros (d and x)
     w   Optional: Decimal field width
 	
-    Formats %d, %x and %s are supported (only). '%%' prints as '%'.
+    Formats %c, %d, %x and %s are supported (only). '%%' prints as '%'.
 
     Floating point is not supported, keeping this library minimal.
 

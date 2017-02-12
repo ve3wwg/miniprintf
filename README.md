@@ -17,7 +17,7 @@ applies:
     0   Optional: Pad with leading zeros (d and x)
     w   Optional: Decimal field width
 	
-    Formats %d, %x and %s are supported (only). '%%' prints as '%'.
+    Formats %c, %d, %x and %s are supported (only). '%%' prints as '%'.
 
     Floating point is not supported, keeping this library minimal.
 

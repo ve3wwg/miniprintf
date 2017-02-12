@@ -1,5 +1,9 @@
 /* Minimal printf() facility for MCUs
- * Warren W. Gay VE3WWG
+ * Warren W. Gay VE3WWG,  Sun Feb 12 2017
+ *
+ * This work is placed in the public domain. No warranty, or guarantee
+ * is expressed or implied. When uou use this source code, you do so
+ * with full responsibility and at your own risk.
  */
 #include <string.h>
 #include "miniprintf.h"
@@ -89,6 +93,10 @@ internal_vprintf(miniarg_t *mini,const char *format,va_list arg) {
 		 * Format according to type: d, x, or s
 		 */
 		switch ( ch ) {
+		case 'c':
+			vint = va_arg(arg,int);
+			mini->putc((char)vint,mini->argp);
+			break;
 		case 'd':		/* Decimal format */
 			vint = va_arg(arg,int);
 			if ( vint < 0 ) {
