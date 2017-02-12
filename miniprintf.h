@@ -34,7 +34,7 @@ applies:
     0   Optional: Pad with leading zeros (d and x)
     w   Optional: Decimal field width
 	
-    Forats %d, %x and %s are supported (only). '%%' prints as '%'.
+    Formats %d, %x and %s are supported (only). '%%' prints as '%'.
 
     Floating point is not supported, keeping this library minimal.
 
@@ -60,6 +60,14 @@ DEVICE FORMATTING HOWTO:
 
     int mini_vprintf_cooked(void (*putc)(char),const char *format,va_list args);
     int mini_vprintf_uncooked(void (*putc)(char),const char *format,va_list args);
+
+    (0) Decide: cooked or uncooked output?
+
+        COOKED means that a CR is sent after every LF is sent out,
+        like UNIX terminal output.
+
+        UNCOOKED means no CR processing is performed. Like snprintf,
+        what you format is what you get.
 
     (1) Declare your own putc function, something like:
 
