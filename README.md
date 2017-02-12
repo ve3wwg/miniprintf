@@ -87,7 +87,7 @@ NOTES:
 MAKEFILE:
 
 No Makefile is provided because the compile options will vary
-with platforms. This code is designed for the Gnu GCC compiler,
+with platform. This code is designed for the Gnu GCC compiler,
 but should compile out of the box on any other reasonable C
 compiler.
 
