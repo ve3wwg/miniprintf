@@ -9,7 +9,7 @@
 int mini_vprintf_cooked(void (*putc)(char),const char *format,va_list args);
 int mini_vprintf_uncooked(void (*putc)(char),const char *format,va_list args);
 
-int mini_snprintf(char *buf,size_t maxbuf,const char *format,...);
+int mini_snprintf(char *buf,unsigned maxbuf,const char *format,...);
 
 #endif // MINIPRINTF_H
 
@@ -51,7 +51,7 @@ FORMAT EXAMPLES:
 
 STRING FORMATTING:
 
-    int mini_snprintf(char *buf,size_t maxbuf,const char *format,...);
+    int mini_snprintf(char *buf,unsigned maxbuf,const char *format,...);
 
     See standard snprintf(3). Note that the output is null terminated
     when the buffer size permits.

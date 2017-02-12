@@ -34,7 +34,7 @@ FORMAT EXAMPLES:
 
 STRING FORMATTING:
 
-    int mini_snprintf(char *buf,size_t maxbuf,const char *format,...);
+    int mini_snprintf(char *buf,unsigned maxbuf,const char *format,...);
 
     See standard snprintf(3). Note that the output is null terminated
     when the buffer size permits. Note that the mini_snprintf() function

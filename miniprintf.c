@@ -144,7 +144,7 @@ internal_vprintf(miniarg_t *mini,const char *format,va_list arg) {
  */
 struct s_internal {
 	void (*putc)(char);	/* User's putc() routine to be used */
-	size_t	 count;		/* Bytes output */
+	unsigned count;		/* Bytes output */
 	unsigned cooked : 1;	/* When true, '\n' also emits '\r' */
 };
 
@@ -203,7 +203,7 @@ mini_vprintf_uncooked(void (*putc)(char),const char *format,va_list args) {
 
 struct s_mini_sprintf {
 	char	*buf;			/* Ptr to output buffer */
-	size_t	maxbuf;			/* Max bytes for buffer */
+	unsigned maxbuf;		/* Max bytes for buffer */
 	char	*ptr;			/* Ptr to next byte */
 };
 
@@ -211,7 +211,7 @@ static void
 mini_sputc(char ch,void *argp) {
 	struct s_mini_sprintf *ctl = (struct s_mini_sprintf *)argp;
 
-	if ( (size_t)(ctl->ptr - ctl->buf) >= ctl->maxbuf )
+	if ( (unsigned)(ctl->ptr - ctl->buf) >= ctl->maxbuf )
 		return;
 	*ctl->ptr++ = ch;
 }
@@ -220,11 +220,11 @@ mini_sputc(char ch,void *argp) {
  * External: sprintf() to buffer (not cooked)
  */
 int
-mini_snprintf(char *buf,size_t maxbuf,const char *format,...) {
+mini_snprintf(char *buf,unsigned maxbuf,const char *format,...) {
 	miniarg_t mini;			/* printf struct */
 	struct s_mini_sprintf ctl;	/* sprintf control */
 	va_list args;			/* format arguments */
-	size_t count;			/* Return count */
+	unsigned count;			/* Return count */
 
 	mini.putc = mini_sputc;		/* Internal routine */
 	mini.argp = (void *)&ctl;	/* Using ctl to guide it */
@@ -236,7 +236,7 @@ mini_snprintf(char *buf,size_t maxbuf,const char *format,...) {
 	internal_vprintf(&mini,format,args);
 	va_end(args);
 
-	count = (size_t)(ctl.ptr - ctl.buf); /* Calculate count */
+	count = (unsigned)(ctl.ptr - ctl.buf); /* Calculate count */
 	mini_sputc(0,&ctl);		/* Null terminate output if possible */
 	return count;			/* Return formatted count */
 }
