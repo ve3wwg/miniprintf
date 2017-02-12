@@ -12,7 +12,7 @@ SUPPORT:
 Each format item %+0wd, %0wx and for strings %-ws, the following
 applies:
 
-    +   Optional: Indicates sign should always print (d and x)
+    +   Optional: Indicates sign should always print (d only)
     -   Optional: Indicates field should be left justified (s)
     0   Optional: Pad with leading zeros (d and x)
     w   Optional: Decimal field width
