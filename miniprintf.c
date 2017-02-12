@@ -1,6 +1,7 @@
 /* Minimal printf() facility for MCUs
  * Warren W. Gay VE3WWG
  */
+#include <string.h>
 #include "miniprintf.h"
 
 /*

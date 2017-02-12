@@ -4,12 +4,20 @@
 #ifndef MINIPRINTF_H
 #define MINIPRINTF_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdarg.h>
 
 int mini_vprintf_cooked(void (*putc)(char),const char *format,va_list args);
 int mini_vprintf_uncooked(void (*putc)(char),const char *format,va_list args);
 
 int mini_snprintf(char *buf,unsigned maxbuf,const char *format,...);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // MINIPRINTF_H
 
