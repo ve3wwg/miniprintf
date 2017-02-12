@@ -61,7 +61,10 @@ DEVICE FORMATTING HOWTO:
 
     (2) Declare your own printf function:
 
-        static int uart_printf(const char *format,...) {
+        int uart_printf(const char *format,...) 
+            __attribute((format(printf,1,2)));
+
+        int uart_printf(const char *format,...) {
             va_list args;
             int rc;
 
@@ -70,6 +73,10 @@ DEVICE FORMATTING HOWTO:
             va_end(args);
             return rc;
         }
+
+	The optional attribute clause can only appear in the function
+        prototype. When provided, it informs the compiler to check the format
+	items against supplied arguments. It is highly recommended.
 
     (3) Use it:
 

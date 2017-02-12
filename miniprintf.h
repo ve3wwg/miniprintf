@@ -17,7 +17,8 @@ extern "C" {
 int mini_vprintf_cooked(void (*putc)(char),const char *format,va_list args);
 int mini_vprintf_uncooked(void (*putc)(char),const char *format,va_list args);
 
-int mini_snprintf(char *buf,unsigned maxbuf,const char *format,...);
+int mini_snprintf(char *buf,unsigned maxbuf,const char *format,...)
+	__attribute((format(printf,3,4)));
 
 #ifdef __cplusplus
 }
@@ -89,7 +90,10 @@ DEVICE FORMATTING HOWTO:
 
     (2) Declare your own printf function:
 
-        static int uart_printf(const char *format,...) {
+        int uart_printf(const char *format,...)
+            __attribute((format(printf,1,2)));
+
+        int uart_printf(const char *format,...) {
             va_list args;
             int rc;
 
@@ -98,6 +102,10 @@ DEVICE FORMATTING HOWTO:
             va_end(args);
             return rc;
         }
+
+	The attribute clause is optional, but when provided can only
+        appear in the function prototype. It allows the compiler to
+	check that you have appropriate arguments for each format item.
 
     (3) Use it:
 
