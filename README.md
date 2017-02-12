@@ -69,7 +69,17 @@ DEVICE FORMATTING HOWTO:
         uart_printf("My dog has %d fleas.\n",flea_count);
 
 NOTES:
+
     1.  Stack usage is minimal (perhaps 256 bytes).
     2.  No malloc/realloc/free calls (no heap usage)
     3.  Re-entrant (no static storage used)
     4.  Compromizes favoured smaller code over speed.
+
+MAKEFILE:
+
+No Makefile is provided because the compile options will vary
+with platforms. This code is designed for the Gnu GCC compiler,
+but should compile out of the box on any other reasonable C
+compiler.
+
+The miniprint.h file can be included and used by C++ programs.
