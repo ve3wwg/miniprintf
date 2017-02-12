@@ -17,7 +17,7 @@ applies:
     0   Optional: Pad with leading zeros (d and x)
     w   Optional: Decimal field width
 	
-    Forats %d, %x and %s are supported (only). '%%' prints as '%'.
+    Formats %d, %x and %s are supported (only). '%%' prints as '%'.
 
     Floating point is not supported, keeping this library minimal.
 
@@ -37,12 +37,21 @@ STRING FORMATTING:
     int mini_snprintf(char *buf,size_t maxbuf,const char *format,...);
 
     See standard snprintf(3). Note that the output is null terminated
-    when the buffer size permits.
+    when the buffer size permits. Note that the mini_snprintf() function
+    never "cooks" output (see below for more info).
 
 DEVICE FORMATTING HOWTO:
 
     int mini_vprintf_cooked(void (*putc)(char),const char *format,va_list args);
     int mini_vprintf_uncooked(void (*putc)(char),const char *format,va_list args);
+
+    (0) Decide: cooked or uncooked output?
+
+        COOKED means that a CR is sent after every LF is sent out,
+        like UNIX terminal output.
+
+        UNCOOKED means no CR processing is performed. Like snprintf,
+        what you format is what you get.
 
     (1) Declare your own putc function, something like:
 
@@ -57,7 +66,7 @@ DEVICE FORMATTING HOWTO:
             int rc;
 
             va_start(args,format);
-            rc = mini_vprintf_cooked(uart_putc,format,args);
+            rc = mini_vprintf_cooked(uart_putc,format,args); // NB: cooked
             va_end(args);
             return rc;
         }
