@@ -1,5 +1,22 @@
-# miniprintf
-Low overhead minimal printf(3) implementation for MCUs like the ARM Cortex-M3
+/* Minimal printf() facility for MCUs
+ * Warren W. Gay VE3WWG
+ */
+#ifndef MINIPRINTF_H
+#define MINIPRINTF_H
+
+#include <stdarg.h>
+
+int mini_vprintf_cooked(void (*putc)(char),const char *format,va_list args);
+int mini_vprintf_uncooked(void (*putc)(char),const char *format,va_list args);
+
+int mini_snprintf(char *buf,size_t maxbuf,const char *format,...);
+
+#endif // MINIPRINTF_H
+
+#if 0
+//////////////////////////////////////////////////////////////////////
+// From the README file:
+//////////////////////////////////////////////////////////////////////
 
 Tested and estimated to require about 640 bytes of code for STM32F103C8T6. Should
 be usable on any MCU platform that supports:
@@ -73,3 +90,6 @@ NOTES:
     2.  No malloc/realloc/free calls (no heap usage)
     3.  Re-entrant (no static storage used)
     4.  Compromizes favoured smaller code over speed.
+
+#endif
+/* End miniprintf.h */
